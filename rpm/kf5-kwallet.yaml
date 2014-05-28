@@ -77,8 +77,6 @@ SubPackages:
       Summary: KWallet runtime deamon
       Description: |
         Provides a runtime deamon that stores passwords.
-      Requires:
-        - kf5-kded
       Files:
           - "%{_kf5_datadir}/dbus-1/services/org.kde.kwalletd5.service"
           - "%{_kf5_bindir}/kwalletd5"

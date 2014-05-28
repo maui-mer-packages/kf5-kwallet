@@ -65,7 +65,6 @@ Provides API to access KWallet data from applications.
 Summary:    KWallet runtime deamon
 Group:      System/Libraries
 Requires:   %{name} = %{version}-%{release}
-Requires:   kf5-kded
 
 %description runtime
 Provides a runtime deamon that stores passwords.
