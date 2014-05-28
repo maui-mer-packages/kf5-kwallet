@@ -1,0 +1,112 @@
+Name         : kf5-kwallet
+Version      : 4.99.0
+Release      : 1
+Group        : System/Base
+License      : GPLv2+
+Summary      : KDE Frameworks 5 Tier 3 solution for password management
+Description  : |
+  KDE Frameworks 5 Tier 3 solution for password management
+URL          : http://www.kde.org
+SetupOptions : -q -n %{name}-%{version}/upstream
+
+Sources:
+    - "%{name}-%{version}.tar.xz"
+
+RpmLintIgnore:
+    - devel-file-in-non-devel-package
+    - no-changelogname-tag
+    - library-without-ldconfig-postin
+    - library-without-ldconfig-postun
+
+Configure    : none
+Builder      : none
+
+PkgBR:
+    - kf5-rpm-macros
+    - extra-cmake-modules
+    - qt5-tools
+    - kf5-kconfig-devel
+    - kf5-kwindowsystem-devel
+    - kf5-kcoreaddons-devel
+    - kf5-kdbusaddons-devel
+    - kf5-ki18n-devel
+    - kf5-kiconthemes-devel
+    - kf5-knotifications-devel
+    - kf5-kservice-devel
+    - kf5-kwidgetsaddons-devel
+    - kf5-kwindowsystem-devel
+    - libgcrypt-devel
+PkgConfigBR:
+    - Qt5Core
+    - Qt5DBus
+    - Qt5Xml
+    - Qt5Network
+    - Qt5Gui
+    - Qt5Widgets
+    - Qt5Concurrent
+    - Qt5Test
+Requires:
+    - kf5-filesystem
+    - kf5-kwallet-libs%{?_isa} = %{version}-%{release}
+    - kf5-kwallet-runtime%{?_isa} = %{version}-%{release}
+
+RequiresPost:
+    - /sbin/ldconfig
+RequiresPostUn:
+    - /sbin/ldconfig
+
+Files:
+    - "%doc COPYING.LIB README.md"
+
+SubPackages:
+    - Name: libs
+      Group: System/Libraries
+      Summary: KWallet framework libraries
+      Description: |
+        Provides API to access KWallet data from applications.
+      Requires:
+        - kf5-filesystem
+      Provides:
+        - kf5-kwallet-api = %{version}-%{release}
+        - kf5-kwallet-api%{?_isa} = %{version}-%{release}
+      Files:
+          - "%{_kf5_libdir}/libKF5Wallet.so.*"
+          - "%{_kf5_libdir}/libkwalletbackend5.so.*"
+    - Name: runtime
+      Group: System/Libraries
+      Summary: KWallet runtime deamon
+      Description: |
+        Provides a runtime deamon that stores passwords.
+      Requires:
+        - kf5-kded
+      Files:
+          - "%{_kf5_datadir}/dbus-1/services/org.kde.kwalletd5.service"
+          - "%{_kf5_bindir}/kwalletd5"
+          - "%{_kf5_datadir}/kservices5/kwalletd5.desktop"
+          - "%{_kf5_datadir}/knotifications5/kwalletd.notifyrc"
+    - Name: devel
+      Group: Development/Libraries
+      Summary: Development files for %{name}
+      Description: |
+        The %{name}-devel package contains the files necessary to develop applications
+        that use %{name}.
+      Requires:
+        - kf5-kwallet-libs%{?_isa} = %{version}-%{release}
+        - kf5-kconfig-devel
+        - kf5-kwindowsystem-devel
+        - kf5-kcoreaddons-devel
+        - kf5-kdbusaddons-devel
+        - kf5-ki18n-devel
+        - kf5-kiconthemes-devel
+        - kf5-knotifications-devel
+        - kf5-kservice-devel
+        - kf5-kwidgetsaddons-devel
+        - kf5-kwindowsystem-devel
+      Files:
+          - "%{_kf5_datadir}/dbus-1/interfaces/kf5_org.kde.KWallet.xml"
+          - "%{_kf5_includedir}/kwallet_version.h"
+          - "%{_kf5_includedir}/KWallet"
+          - "%{_kf5_libdir}/cmake/KF5Wallet"
+          - "%{_kf5_libdir}/libKF5Wallet.so"
+          - "%{_kf5_libdir}/libkwalletbackend5.so"
+          - "%{_datadir}/qt5/mkspecs/modules/qt_KWallet.pri"
