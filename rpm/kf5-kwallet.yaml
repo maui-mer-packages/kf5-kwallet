@@ -35,7 +35,6 @@ PkgBR:
     - kf5-kservice-devel
     - kf5-kwidgetsaddons-devel
     - kf5-kwindowsystem-devel
-    - libgcrypt-devel
 PkgConfigBR:
     - Qt5Core
     - Qt5DBus
@@ -45,6 +44,8 @@ PkgConfigBR:
     - Qt5Widgets
     - Qt5Concurrent
     - Qt5Test
+    - libgcrypt
+    - libgpg-error
 Requires:
     - kf5-filesystem
     - kf5-kwallet-libs%{?_isa} = %{version}-%{release}
