@@ -1,5 +1,5 @@
-Name         : kf5-kwallet
-Version      : 5.0.0
+Name         : kwallet
+Version      : 5.1.0
 Release      : 1
 Group        : System/Base
 License      : GPLv2+
@@ -25,16 +25,16 @@ PkgBR:
     - kf5-rpm-macros
     - extra-cmake-modules
     - qt5-tools
-    - kf5-kconfig-devel
-    - kf5-kwindowsystem-devel
-    - kf5-kcoreaddons-devel
-    - kf5-kdbusaddons-devel
-    - kf5-ki18n-devel
-    - kf5-kiconthemes-devel
-    - kf5-knotifications-devel
-    - kf5-kservice-devel
-    - kf5-kwidgetsaddons-devel
-    - kf5-kwindowsystem-devel
+    - kconfig-devel
+    - kwindowsystem-devel
+    - kcoreaddons-devel
+    - kdbusaddons-devel
+    - ki18n-devel
+    - kiconthemes-devel
+    - knotifications-devel
+    - kservice-devel
+    - kwidgetsaddons-devel
+    - kwindowsystem-devel
 PkgConfigBR:
     - Qt5Core
     - Qt5DBus
@@ -48,8 +48,8 @@ PkgConfigBR:
     - libgpg-error
 Requires:
     - kf5-filesystem
-    - kf5-kwallet-libs%{?_isa} = %{version}-%{release}
-    - kf5-kwallet-runtime%{?_isa} = %{version}-%{release}
+    - kwallet-libs%{?_isa} = %{version}-%{release}
+    - kwallet-runtime%{?_isa} = %{version}-%{release}
 
 RequiresPost:
     - /sbin/ldconfig
@@ -68,8 +68,8 @@ SubPackages:
       Requires:
         - kf5-filesystem
       Provides:
-        - kf5-kwallet-api = %{version}-%{release}
-        - kf5-kwallet-api%{?_isa} = %{version}-%{release}
+        - kwallet-api = %{version}-%{release}
+        - kwallet-api%{?_isa} = %{version}-%{release}
       Files:
           - "%{_kf5_libdir}/libKF5Wallet.so.*"
           - "%{_kf5_libdir}/libkwalletbackend5.so.*"
@@ -79,10 +79,10 @@ SubPackages:
       Description: |
         Provides a runtime deamon that stores passwords.
       Files:
-          - "%{_kf5_datadir}/dbus-1/services/org.kde.kwalletd5.service"
+          - "%{_kf5_sharedir}/dbus-1/services/*"
           - "%{_kf5_bindir}/kwalletd5"
-          - "%{_kf5_datadir}/kservices5/kwalletd5.desktop"
-          - "%{_kf5_datadir}/knotifications5/kwalletd.notifyrc"
+          - "%{_kf5_servicesdir}/kwalletd5.desktop"
+          - "%{_kf5_sharedir}/knotifications5/kwalletd.notifyrc"
     - Name: devel
       Group: Development/Libraries
       Summary: Development files for %{name}
@@ -90,22 +90,22 @@ SubPackages:
         The %{name}-devel package contains the files necessary to develop applications
         that use %{name}.
       Requires:
-        - kf5-kwallet-libs%{?_isa} = %{version}-%{release}
-        - kf5-kconfig-devel
-        - kf5-kwindowsystem-devel
-        - kf5-kcoreaddons-devel
-        - kf5-kdbusaddons-devel
-        - kf5-ki18n-devel
-        - kf5-kiconthemes-devel
-        - kf5-knotifications-devel
-        - kf5-kservice-devel
-        - kf5-kwidgetsaddons-devel
-        - kf5-kwindowsystem-devel
+        - kwallet-libs%{?_isa} = %{version}-%{release}
+        - kconfig-devel
+        - kwindowsystem-devel
+        - kcoreaddons-devel
+        - kdbusaddons-devel
+        - ki18n-devel
+        - kiconthemes-devel
+        - knotifications-devel
+        - kservice-devel
+        - kwidgetsaddons-devel
+        - kwindowsystem-devel
       Files:
-          - "%{_kf5_datadir}/dbus-1/interfaces/kf5_org.kde.KWallet.xml"
+          - "%{_kf5_dbusinterfacesdir}/kf5_org.kde.KWallet.xml"
           - "%{_kf5_includedir}/kwallet_version.h"
           - "%{_kf5_includedir}/KWallet"
-          - "%{_kf5_libdir}/cmake/KF5Wallet"
+          - "%{_kf5_cmakedir}/KF5Wallet"
           - "%{_kf5_libdir}/libKF5Wallet.so"
           - "%{_kf5_libdir}/libkwalletbackend5.so"
-          - "%{_datadir}/qt5/mkspecs/modules/qt_KWallet.pri"
+          - "%{_kf5_mkspecsdir}/qt_KWallet.pri"
