@@ -117,7 +117,9 @@ rm -rf %{buildroot}
 # >> install post
 # << install post
 
-%files
+%find_lang kwallet5_qt --with-qt --all-name || :
+
+%files -f kwallet5_qt.lang
 %defattr(-,root,root,-)
 %doc COPYING.LIB README.md
 # >> files
